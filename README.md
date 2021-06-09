@@ -20,17 +20,17 @@
 
 ## itemsテーブル
 
-| Column           | Type                    | Options     |
-| ---------------- | ----------------------- | ----------- |
-| item_name        | string                  | null: false |
-| explanation      | string                  | null: false |
-| category_id      | string                  | null: false |
-| status_id        | text                    | null: false |
-| shipping_fee_id  | string                  | null: false |
-| shipping_area_id | string                  | null: false |
-| shipping_days_id | string                  | null: false |
-| price            | integer                 | null: false |
-| user             | references              |             |
+| Column           | Type                    | Options                        |
+| ---------------- | ----------------------- | ------------------------------ |
+| item_name        | string                  | null: false                    |
+| explanation      | string                  | null: false                    |
+| category_id      | integer                 | null: false                    |
+| status_id        | integer                 | null: false                    |
+| shipping_fee_id  | integer                 | null: false                    |
+| shipping_area_id | integer                 | null: false                    |
+| shipping_days_id | integer                 | null: false                    |
+| price            | integer                 | null: false                    |
+| user             | references              | null: false, foreign_key: true |
 
 ### Association
 
@@ -39,10 +39,10 @@
 
 ## purchasesテーブル
 
-| Column        | Type       | Options     |
-| ------------- | ---------- | ----------- |
-| user          | references |             |
-| item          | references |             |
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| user          | references | null: false, foreign_key: true |
+| item          | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -52,15 +52,15 @@
 
 ## addressesテーブル
 
-| Column       | Type       | Options     |
-| ------------ | ---------- | ----------- |
-| postal_code  | integer    | null: false |
-| prefecture   | string     | null: false |
-| municipality | string     | null: false |
-| house_number | string     | null: false |
-| building     | string     |             |
-| phone_number | integer    | null: false |
-| purchase_id  | references |             |
+| Column       | Type       | Options                        |
+| ------------ | ---------- | ------------------------------ |
+| postal_code  | string     | null: false                    |
+| prefecture   | string     | null: false                    |
+| municipality | string     | null: false                    |
+| house_number | string     | null: false                    |
+| building     | string     |                                |
+| phone_number | string     | null: false                    |
+| purchase     | references | null: false, foreign_key: true |
 
 ### Association
 
