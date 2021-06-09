@@ -2,13 +2,16 @@
 
 ## userテーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| nickname           | string | null: false |
-| encrypted_password | string | null: false |
-| first_name         | string | null: false |
-| last_name          | string | null: false |
-| birthday           | string | null: false |
+| Column             | Type   | Options      |
+| ------------------ | ------ | ------------ |
+| nickname           | string | null: false  |
+| email              | string | unique: true |
+| encrypted_password | string | null: false  |
+| first_name         | string | null: false  |
+| last_name          | string | null: false  |
+| first_pseudonym    | string | null: false  |
+| last_pseudonym     | string | null: false  |
+| birthday           | date   | null: false  |
 
 ### Association
 
@@ -17,18 +20,17 @@
 
 ## itemsテーブル
 
-| Column        | Type                    | Options     |
-| ------------- | ----------------------- | ----------- |
-| item_name     | string                  | null: false |
-| explanation   | string                  | null: false |
-| category      | string                  | null: false |
-| status        | text                    | null: false |
-| shipping_fee  | string                  | null: false |
-| shipping_area | string                  | null: false |
-| date          | string                  | null: false |
-| price         | integer                 | null: false |
-| image         | ActiveStorageで実装     |             |
-| user          | references              |             |
+| Column           | Type                    | Options     |
+| ---------------- | ----------------------- | ----------- |
+| item_name        | string                  | null: false |
+| explanation      | string                  | null: false |
+| category_id      | string                  | null: false |
+| status_id        | text                    | null: false |
+| shipping_fee_id  | string                  | null: false |
+| shipping_area_id | string                  | null: false |
+| shipping_days_id | string                  | null: false |
+| price            | integer                 | null: false |
+| user             | references              |             |
 
 ### Association
 
@@ -50,14 +52,15 @@
 
 ## addressesテーブル
 
-| Column       | Type    | Options     |
-| ------------ | ------- | ----------- |
-| postal_code  | integer | null: false |
-| prefecture   | string  | null: false |
-| municipality | string  | null: false |
-| house_number | string  | null: false |
-| building     | string  |             |
-| phone_number | integer | null: false |
+| Column       | Type       | Options     |
+| ------------ | ---------- | ----------- |
+| postal_code  | integer    | null: false |
+| prefecture   | string     | null: false |
+| municipality | string     | null: false |
+| house_number | string     | null: false |
+| building     | string     |             |
+| phone_number | integer    | null: false |
+| purchase_id  | references |             |
 
 ### Association
 
