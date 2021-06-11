@@ -30,6 +30,11 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Email can't be blank")
     end
+    it 'emailに「@」がないと登録できない' do
+      @user.email = 'aaaaaaaa'
+      @user.valid?
+      expect(@user.errors.full_messages).to include ("Email is invalid")
+    end
     it 'emailが重複していると登録できない' do
       @user.save
       another_user = FactoryBot.build(:user, email: @user.email)
@@ -47,8 +52,18 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
     end
-    it 'passwordが半角英数字混合でないと登録できない' do
+    it 'passwordが半角数字のみの場合は登録できない' do
+      @user.password = '111111'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Password is invalid. Include both letters and numbers')
+    end
+    it 'passwordが半角英字のみの場合は登録できない' do
       @user.password = 'aaaaaa'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Password is invalid. Include both letters and numbers')
+    end
+    it 'passwordが全角の場合は登録できない' do
+      @user.password = 'AAAAAA'
       @user.valid?
       expect(@user.errors.full_messages).to include('Password is invalid. Include both letters and numbers')
     end
@@ -68,10 +83,20 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("First name can't be blank")
     end
+    it 'first_nameが漢字・平仮名・カタカナ以外だと登録できない' do
+      @user.first_name = 'taro'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name is invalid. Input full-width characters")
+    end
     it 'last_nameが空だと登録できない' do
       @user.last_name = ''
       @user.valid?
       expect(@user.errors.full_messages).to include("Last name can't be blank")
+    end
+    it 'last_nameが漢字・平仮名・カタカナ以外だと登録できない' do
+      @user.last_name = 'abe'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last name is invalid. Input full-width characters")
     end
     it 'first_pseudonymが空だと登録できない' do
       @user.first_pseudonym = ''
