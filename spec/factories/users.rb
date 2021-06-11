@@ -8,7 +8,7 @@ FactoryBot.define do
     first_pseudonym       { gimei.first.katakana }
     last_pseudonym        { gimei.last.katakana }
     birth_date            { Faker::Date.birthday(min_age: 18, max_age: 65) }
-    password = Faker::Internet.password(min_length: 6)
+    password = '1a' + Faker::Internet.password(min_length: 6)
     password              { password }
     password_confirmation { password }
   end
