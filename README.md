@@ -11,7 +11,7 @@
 | last_name          | string | null: false               |
 | first_pseudonym    | string | null: false               |
 | last_pseudonym     | string | null: false               |
-| birthday           | date   | null: false               |
+| birth_date         | date   | null: false               |
 
 ### Association
 
