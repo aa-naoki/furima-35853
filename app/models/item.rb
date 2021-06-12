@@ -1,4 +1,5 @@
 class Item < ApplicationRecord
+  belongs_to :user
   with_option presence: true do
     validates :item_name
     validates :explanation
