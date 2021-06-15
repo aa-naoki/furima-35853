@@ -60,13 +60,28 @@ RSpec.describe Item, type: :model do
       @item.valid?
       expect(@item.errors.full_messages).to include("Price can't be blank")
     end
+    it 'priceの入力が半角英数混合の場合出品できない' do
+      @item.price = '100aaa'
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Price is invalid. Input half-width characters')
+    end
+    it 'priceの入力が半角英語だけでは出品できない' do
+      @item.price = 'aaaaa'
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Price is invalid. Input half-width characters')
+    end
     it 'priceの入力が全角の場合出品できない' do
       @item.price = '１００００'
       @item.valid?
       expect(@item.errors.full_messages).to include('Price is invalid. Input half-width characters')
     end
-    it 'priceの入力が300~9,999,999の間でない場合出品できない' do
+    it 'priceの入力が300以下の場合出品できない' do
       @item.price = '100'
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Price is out of setting range')
+    end
+    it 'priceの入力が10,000,000以上の場合出品できない' do
+      @item.price = '10000000'
       @item.valid?
       expect(@item.errors.full_messages).to include('Price is out of setting range')
     end
@@ -94,6 +109,11 @@ RSpec.describe Item, type: :model do
       @item.shipping_day_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Shipping day can't be blank")
+    end
+    it 'Userが紐づいていないと出品できない' do
+      @item.user = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include("User must exist")
     end
   end
 end
