@@ -43,57 +43,57 @@ RSpec.describe Item, type: :model do
     it 'imageが空だと出品できない' do
       @item.image = nil
       @item.valid?
-      expect(@item.errors.full_messages).to include ("Image can't be blank" )
+      expect(@item.errors.full_messages).to include("Image can't be blank")
     end
     it 'item_nameが空だと出品できない' do
       @item.item_name = ''
       @item.valid?
-      expect(@item.errors.full_messages).to include ("Item name can't be blank" )
+      expect(@item.errors.full_messages).to include("Item name can't be blank")
     end
     it 'explanationが空だと出品できない' do
       @item.explanation = ''
       @item.valid?
-      expect(@item.errors.full_messages).to include ("Explanation can't be blank" )
+      expect(@item.errors.full_messages).to include("Explanation can't be blank")
     end
     it 'priceが空だと出品できない' do
       @item.price = ''
       @item.valid?
-      expect(@item.errors.full_messages).to include ("Price can't be blank" )
+      expect(@item.errors.full_messages).to include("Price can't be blank")
     end
     it 'priceの入力が全角の場合出品できない' do
       @item.price = '１００００'
       @item.valid?
-      expect(@item.errors.full_messages).to include ("Price is invalid. Input half-width characters" )
+      expect(@item.errors.full_messages).to include('Price is invalid. Input half-width characters')
     end
     it 'priceの入力が300~9,999,999の間でない場合出品できない' do
       @item.price = '100'
       @item.valid?
-      expect(@item.errors.full_messages).to include ("Price is out of setting range" )
+      expect(@item.errors.full_messages).to include('Price is out of setting range')
     end
     it 'category_idが1だと出品できない' do
       @item.category_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include ("Category can't be blank" )
+      expect(@item.errors.full_messages).to include("Category can't be blank")
     end
     it 'status_idが1だと出品できない' do
       @item.status_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include ("Status can't be blank" )
+      expect(@item.errors.full_messages).to include("Status can't be blank")
     end
     it 'shipping_fee_idが1だと出品できない' do
       @item.shipping_fee_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include ("Shipping fee can't be blank" )
+      expect(@item.errors.full_messages).to include("Shipping fee can't be blank")
     end
     it 'shipping_area_idが1だと出品できない' do
       @item.shipping_area_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include ("Shipping area can't be blank" )
+      expect(@item.errors.full_messages).to include("Shipping area can't be blank")
     end
     it 'shipping_day_idが1だと出品できない' do
       @item.shipping_day_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include ("Shipping day can't be blank" )
+      expect(@item.errors.full_messages).to include("Shipping day can't be blank")
     end
   end
 end
