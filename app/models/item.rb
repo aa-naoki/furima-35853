@@ -16,11 +16,6 @@ class Item < ApplicationRecord
     validates :price,
               numericality: { only_integer: true, message: 'is invalid. Input half-width characters' },
               inclusion: { in: 300..9_999_999, message: 'is out of setting range' }
-    validates :category_id
-    validates :status_id
-    validates :shipping_fee_id
-    validates :shipping_area_id
-    validates :shipping_day_id
     with_options numericality: { other_than: 1, message: "can't be blank" } do
       validates :category_id
       validates :status_id
