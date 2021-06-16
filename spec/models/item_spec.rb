@@ -11,11 +11,11 @@ RSpec.describe Item, type: :model do
       expect(@item).to be_valid
     end
     it 'priceの入力が半角であれば出品できる' do
-      @item.price = '10000'
+      @item.price = 10000
       expect(@item).to be_valid
     end
     it 'priceの入力が300~9,999,999の間であれば出品できる' do
-      @item.price = '10000'
+      @item.price = 10000
       expect(@item).to be_valid
     end
     it 'category_idが1以外なら出品できる' do
@@ -76,12 +76,12 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include('Price is invalid. Input half-width characters')
     end
     it 'priceの入力が300以下の場合出品できない' do
-      @item.price = '100'
+      @item.price = 100
       @item.valid?
       expect(@item.errors.full_messages).to include('Price is out of setting range')
     end
     it 'priceの入力が10,000,000以上の場合出品できない' do
-      @item.price = '10000000'
+      @item.price = 10000000
       @item.valid?
       expect(@item.errors.full_messages).to include('Price is out of setting range')
     end
