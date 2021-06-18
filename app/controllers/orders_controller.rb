@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
   def index
-    @order = 
+    @order = Item.find_by(id: params[:item_id] )
   end
 end
