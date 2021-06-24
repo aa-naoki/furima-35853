@@ -4,25 +4,25 @@ RSpec.describe PurchaseAddress, type: :model do
   before do
     user = FactoryBot.create(:user)
     item = FactoryBot.create(:item)
-    @purchase_address = FactoryBot.build(:purchase_address, user_id: user.id, item_id: item.id,)
+    @purchase_address = FactoryBot.build(:purchase_address, user_id: user.id, item_id: item.id)
     sleep 0.1
   end
 
   describe '商品購入' do
     context '商品購入できるとき'
-    it '全ての値が正しく入力されていれば購入できる'do
+    it '全ての値が正しく入力されていれば購入できる' do
       expect(@purchase_address).to be_valid
     end
     it 'postal_codeにハイフンが含まれていれば購入できる' do
-      @purchase_address.postal_code = "123-1234"
+      @purchase_address.postal_code = '123-1234'
       expect(@purchase_address).to be_valid
     end
     it 'postal_codeのハイフン前が3文字の半角数字であれば購入できる' do
-      @purchase_address.postal_code = "123-1234"
+      @purchase_address.postal_code = '123-1234'
       expect(@purchase_address).to be_valid
     end
     it 'postal_codeのハイフン後が4文字の半角数字であれば購入できる' do
-      @purchase_address.postal_code = "123-1234"
+      @purchase_address.postal_code = '123-1234'
       expect(@purchase_address).to be_valid
     end
     it 'shipping_area_idが1以外なら購入できる' do
@@ -41,7 +41,7 @@ RSpec.describe PurchaseAddress, type: :model do
       @purchase_address.phone_number = '09012345678'
       expect(@purchase_address).to be_valid
     end
-    
+
     context '商品購入できないとき'
     it 'Userが紐づいていないと購入できない' do
       @purchase_address.user_id = nil
@@ -109,9 +109,9 @@ RSpec.describe PurchaseAddress, type: :model do
       expect(@purchase_address.errors.full_messages).to include("Phone number can't be blank")
     end
     it 'phone_numberが全角数字では購入できない' do
-      @purchase_address.phone_number ='０９０１２３４５６７８'
+      @purchase_address.phone_number = '０９０１２３４５６７８'
       @purchase_address.valid?
-      expect(@purchase_address.errors.full_messages).to include("Phone number is invalid. Input only number")
+      expect(@purchase_address.errors.full_messages).to include('Phone number is invalid. Input only number')
     end
     it 'phone_numberが9文字以下では購入できない' do
       @purchase_address.phone_number = '090123456'
@@ -121,7 +121,7 @@ RSpec.describe PurchaseAddress, type: :model do
     it 'tokenが空では購入できない' do
       @purchase_address.token = ''
       @purchase_address.valid?
-      expect(@purchase_address.errors.full_messages).to include("Token can't be blank") 
+      expect(@purchase_address.errors.full_messages).to include("Token can't be blank")
     end
   end
 end
