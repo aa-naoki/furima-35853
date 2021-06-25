@@ -113,10 +113,20 @@ RSpec.describe PurchaseAddress, type: :model do
       @purchase_address.valid?
       expect(@purchase_address.errors.full_messages).to include('Phone number is invalid. Input only number')
     end
+    it 'phone_numberが英数混合では購入できない' do
+      @purchase_address.phone_number = '090asdf1234'
+      @purchase_address.valid?
+      expect(@purchase_address.errors.full_messages).to include('Phone number is invalid. Input only number')
+    end
     it 'phone_numberが9文字以下では購入できない' do
       @purchase_address.phone_number = '090123456'
       @purchase_address.valid?
-      expect(@purchase_address.errors.full_messages).to include('Phone number is too short')
+      expect(@purchase_address.errors.full_messages).to include('Phone number is invalid')
+    end
+    it 'phone_numberが12文字以上では購入できない' do
+      @purchase_address.phone_number = '090123456789'
+      @purchase_address.valid?
+      expect(@purchase_address.errors.full_messages).to include('Phone number is invalid')
     end
     it 'tokenが空では購入できない' do
       @purchase_address.token = ''
