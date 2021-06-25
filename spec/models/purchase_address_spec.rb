@@ -88,6 +88,11 @@ RSpec.describe PurchaseAddress, type: :model do
       @purchase_address.valid?
       expect(@purchase_address.errors.full_messages).to include('Postal code is invalid. Enter it as follows (e.g. 123-4567)')
     end
+    it 'shipping_area_idが空では購入できない' do
+      @purchase_address.shipping_area_id = nil
+      @purchase_address.valid?
+      expect(@purchase_address.errors.full_messages).to include("Shipping area can't be blank")
+    end
     it 'shipping_area_idが1では購入できない' do
       @purchase_address.shipping_area_id = 1
       @purchase_address.valid?
