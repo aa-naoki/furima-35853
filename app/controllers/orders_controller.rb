@@ -39,6 +39,10 @@ class OrdersController < ApplicationController
   end
 
   def sold_out_item
-    redirect_to root_path if @order.purchase.present?
+    if @order.purchase.present?
+    else
+      current_user == @order.user.id
+    end
+    redirect_to root_path
   end
 end
