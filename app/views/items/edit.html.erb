@@ -1,11 +1,11 @@
 <div class="items-sell-contents">
   <header class="items-sell-header">
     <%= link_to image_tag('furima-logo-color.png' , size: '185x50'), "/" %>
-  </header>
 
+  </header>
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
-    <%= form_with model: @item, local: true do |f| %>
+    <%= form_with model: @item, id:"item_image", local: true do |f| %>
 
     <%= render 'shared/error_messages', model: f.object %>
 
@@ -19,7 +19,14 @@
         <p>
           クリックしてファイルをアップロード
         </p>
-        <%= f.file_field :image, id:"item-image" %>
+        <%= f.file_field :images, multiple: true, name: 'item[images][]' %>
+        <div id="image-list">
+            <% @item.images.each_with_index do |image, i| %>
+              <div id="image-<%= i %>">
+                <%= image_tag image, class: 'exist-image' %>
+              </div>
+            <% end %>
+        </div>
       </div>
     </div>
     <%# /商品画像 %>
