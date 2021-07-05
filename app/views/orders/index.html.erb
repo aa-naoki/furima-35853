@@ -7,7 +7,14 @@
     </h1>
     <%# 購入内容の表示 %>
     <div class='buy-item-info'>
-      <%= image_tag @order.image, class: 'buy-item-img' %>
+      <% if @order.images.count > 1 %>
+        <%= image_tag @order.images[0], class:"buy-item-image" %>
+      <% else %>
+        <% @order.images.each do |image|%>
+          <%= image_tag image, class:"buy-item-image" %>
+        <% end %>
+      <% end %>
+      <%#= image_tag @order.image, class: 'buy-item-img' %>
       <div class='buy-item-right-content'>
         <h2 class='buy-item-text'>
           <%= @order.item_name %>

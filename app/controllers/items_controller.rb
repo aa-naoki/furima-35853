@@ -20,6 +20,10 @@ class ItemsController < ApplicationController
     end
   end
 
+  def edit
+    # binding.pry
+  end
+
   def update
     if @item.update(item_params)
       redirect_to item_path(params[:id])
@@ -38,7 +42,7 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:item_name, :explanation, :category_id, :status_id,
-                                 :shipping_fee_id, :shipping_area_id, :shipping_day_id, :price, :image).merge(user_id: current_user.id)
+                                 :shipping_fee_id, :shipping_area_id, :shipping_day_id, :price, images: []).merge(user_id: current_user.id)
   end
 
   def set_params

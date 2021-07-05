@@ -1,5 +1,5 @@
 /* 商品画像 */
-img#image_size {
+.exist-image {
   height: 200px;
   width: 300px;
   margin-top: 20px;

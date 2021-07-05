@@ -19,9 +19,14 @@
         <p>
           クリックしてファイルをアップロード
         </p>
-        <%= f.file_field :image %>
-        <div id="image-list"></div>
-        <%= image_tag @item.image, id: "image_size" if @item.image.present? %>
+        <%= f.file_field :images, multiple: true, name: 'item[images][]' %>
+        <div id="image-list">
+            <% @item.images.each_with_index do |image, i| %>
+              <div id="image-<%= i %>">
+                <%= image_tag image, class: 'exist-image' %>
+              </div>
+            <% end %>
+        </div>
       </div>
     </div>
     <%# /商品画像 %>
